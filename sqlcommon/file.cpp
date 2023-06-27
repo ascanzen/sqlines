@@ -26,7 +26,11 @@
 #include <direct.h>
 #else
 #include <sys/stat.h>
-#include <sys/io.h>
+#ifdef __APPLE__
+        #include <sys/uio.h>
+#else
+        #include <sys/io.h>
+#endif
 #include <unistd.h>
 
 #define _read read
