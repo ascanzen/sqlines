@@ -58,6 +58,23 @@ class _SwigNonDynamicMeta(type):
     __setattr__ = _swig_setattr_nondynamic_class_variable(type.__setattr__)
 
 
+SQL_SQL_SERVER = _sqlines.SQL_SQL_SERVER
+SQL_ORACLE = _sqlines.SQL_ORACLE
+SQL_DB2 = _sqlines.SQL_DB2
+SQL_MYSQL = _sqlines.SQL_MYSQL
+SQL_POSTGRESQL = _sqlines.SQL_POSTGRESQL
+SQL_SYBASE = _sqlines.SQL_SYBASE
+SQL_INFORMIX = _sqlines.SQL_INFORMIX
+SQL_GREENPLUM = _sqlines.SQL_GREENPLUM
+SQL_SYBASE_ASA = _sqlines.SQL_SYBASE_ASA
+SQL_TERADATA = _sqlines.SQL_TERADATA
+SQL_NETEZZA = _sqlines.SQL_NETEZZA
+SQL_MARIADB = _sqlines.SQL_MARIADB
+SQL_HIVE = _sqlines.SQL_HIVE
+SQL_REDSHIFT = _sqlines.SQL_REDSHIFT
+SQL_ESGYNDB = _sqlines.SQL_ESGYNDB
+SQL_SYBASE_ADS = _sqlines.SQL_SYBASE_ADS
+SQL_MARIADB_ORA = _sqlines.SQL_MARIADB_ORA
 
 def CreateParserObject():
     return _sqlines.CreateParserObject()
@@ -65,15 +82,15 @@ def CreateParserObject():
 def SetParserTypes(parser, source, target):
     return _sqlines.SetParserTypes(parser, source, target)
 
-def ConvertSql(parser, input, size, output, out_size, lines):
-    return _sqlines.ConvertSql(parser, input, size, output, out_size, lines)
-
 def SetParserOption(parser, option, value):
     return _sqlines.SetParserOption(parser, option, value)
 
-def CreateAssessmentReport(parser, summary):
-    return _sqlines.CreateAssessmentReport(parser, summary)
+def ConvertSql(parser, input, size, output, out_size, lines):
+    return _sqlines.ConvertSql(parser, input, size, output, out_size, lines)
 
 def FreeOutput(output):
     return _sqlines.FreeOutput(output)
+
+def CreateAssessmentReport(parser, summary):
+    return _sqlines.CreateAssessmentReport(parser, summary)
 

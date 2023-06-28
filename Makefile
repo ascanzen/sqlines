@@ -71,5 +71,5 @@ run:
 	@make DEBUG=true && ./sqlline
 
 python:
-	#  swig -python -c++ -o ./sqlparser/dllmain.cpp sqlines.swig
+	swig -python -c++ -o ./sqlparser/sqlines_wrap.cpp ./sqlparser/sqlines.i
 	python3.9 setup.py build_ext --inplace
