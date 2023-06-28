@@ -1571,7 +1571,7 @@ bool SqlParser::ParseOracleRownumCondition(Token *first, Token *op, Token *secon
 
 	// rownum can be at any side of the expression
 	bool rownum1 = first->Compare("rownum", L"rownum", 6);
-	bool rownum2 = (first == false) ? second->Compare("rownum", L"rownum", 6) : false;
+	bool rownum2 = first ? second->Compare("rownum", L"rownum", 6) : false;
 
 	if(rownum1 == false && rownum2 == false)
 		return false;

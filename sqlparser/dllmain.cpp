@@ -97,3 +97,22 @@ BOOL APIENTRY DllMain( HMODULE /*hModule*/, DWORD  ul_reason_for_call, LPVOID /*
 }
 
 #endif
+
+#include "sqlparser.h"
+#include <string>
+#include <iostream>
+int main()
+{
+    SqlParser sql_parser;
+	sql_parser.SetTypes(SQL_MYSQL, SQL_ORACLE);
+
+	std::string input("select * from tables where tables.column1 = 5;");
+	const char* output;
+	int out_size = 0;
+	int lines = 0;
+	sql_parser.Convert(input.c_str(), input.length() , &output, &out_size, &lines);
+	std::cout<< input << std::endl;
+	std::cout<< output << std::endl;
+
+    return 0;
+}

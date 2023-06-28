@@ -6341,7 +6341,7 @@ bool SqlParser::ParseIfStatement(Token *if_, int scope)
 				// Check if BEGIN follows
 				Token *next_begin = GetNext("BEGIN", L"BEGIN", 5);
 
-				if(next_begin == false)
+				if(next_begin)
 				{
 					Token::Change(then, "BEGIN", L"BEGIN", 5);
 					then_to_begin = true;
