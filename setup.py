@@ -11,6 +11,7 @@ STD_EXT = Extension(
     name='sqlines',
     swig_opts=['-c++'],
     sources=[
+        "sqlparser/sqlines.i",
         "sqlparser/clauses.cpp",
         "sqlparser/guess.cpp",
         "sqlparser/post.cpp",
