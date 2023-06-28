@@ -69,3 +69,8 @@ clean:
 
 run:
 	@make DEBUG=true && ./sqlline
+
+
+python:
+    #  swig -python -c++ -o ./sqlparser/dllmain.cpp sqlines.swig
+     python setup.py build_ext --inplace
