@@ -2998,13 +2998,13 @@ static swig_module_info swig_module = {swig_types, 4, 0, 0, 0, 0};
               @(target):= _sqlines.so
   ------------------------------------------------*/
 #if PY_VERSION_HEX >= 0x03000000
-#  define SWIG_init    PyInit__sqlines
+#  define SWIG_init    PyInit_sqlines
 
 #else
 #  define SWIG_init    init_sqlines
 
 #endif
-#define SWIG_name    "_sqlines"
+#define SWIG_name    "sqlines"
 
 #ifdef __cplusplus
 #include <utility>

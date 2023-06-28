@@ -1,17 +1,21 @@
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
 
-"""Setup this SWIG library."""
-import runpy
+import sysconfig
 
-from setuptools import Extension, find_packages, setup
-from setuptools.command.build_py import build_py
+from setuptools import Extension, setup
 
-STD_EXT = Extension(
-    name='sqlines',
-    swig_opts=['-c++'],
+language = "c++"
+std = "c++17"
+
+default_compile_args = sysconfig.get_config_var("CFLAGS").split()
+extra_compile_args = [f"-std={std}"]
+
+print(f"Default compile arguments: {default_compile_args}")
+print(f"Extra compile arguments: {extra_compile_args}")
+
+extension = Extension(
+    "sqlines",
     sources=[
-        "sqlparser/sqlines.i",
+        "sqlparser/sqlines_wrap.cpp",
         "sqlparser/clauses.cpp",
         "sqlparser/guess.cpp",
         "sqlparser/post.cpp",
@@ -44,50 +48,13 @@ STD_EXT = Extension(
         "sqlparser/statements.cpp",
    
     ],
-    include_dirs=[
-        'sqlparser',
-    ],
-    extra_compile_args=[  # The g++ (4.8) in Travis needs this
-        '-std=c++17',
-    ]
+    extra_compile_args=extra_compile_args,
+    language=language,
 )
 
-
-# Build extensions before python modules,
-# or the generated SWIG python files will be missing.
-class BuildPy(build_py):
-    def run(self):
-        self.run_command('build_ext')
-        super(build_py, self).run()
-
-
-INFO = runpy.run_path('sqlparser/_meta.py')
-
 setup(
-    name='sqlines',
-    description='A Python wrapper for sqlines',
-    version=INFO['__version__'],
-    author=INFO['__author__'],
-    license=INFO['__copyright__'],
-    author_email=INFO['__email__'],
-    url=INFO['__url__'],
-    keywords=['sqlines'],
-
-    packages=find_packages('sqlines'),
-    package_dir={'': 'sqlines'},
-    package_data={'': ['*.pyd']},
-    ext_modules=[STD_EXT],
-    cmdclass={
-        'build_py': BuildPy,
-    },
-
-    python_requires='>=3.1',
-    setup_requires=[
-        'pytest-runner',
-    ],
-    tests_require=[
-        'pytest',
-        'pytest-cov',
-        'pytest-flake8',
-    ],    
+    name="sqlines",
+    version="1.0",
+    description="This is Example module written in C++",
+    ext_modules=[extension],
 )
