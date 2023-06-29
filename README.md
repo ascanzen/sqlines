@@ -17,8 +17,13 @@ cd sqlparser
 
 For technical support and custom development, please contact us at <support@sqlines.com>
 
-## Mac
+## 编译注意事项
+
+### Mac下编译，设置Python.h 目录
 
 sudo find / -iname "Python.h"
-
 export CPLUS_INCLUDE_PATH="/usr/local/Cellar/python@3.9/3.9.17_1/Frameworks/Python.framework/Versions/3.9/include/python3.9"
+
+### swig问题
+
+sqlines.py生成文件中 _sqlines 需要手动改为 sqlines，否则会将Pyinit_sqlines接口写在 Pyinit__sqlines.

@@ -11,6 +11,14 @@
             "program": "${workspaceFolder}/sqlline",
             "args": [],
             "cwd": "${workspaceFolder}"
-        }
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }        
     ]
 }
