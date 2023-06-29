@@ -3287,48 +3287,6 @@ SWIG_AsPtr_std_string (PyObject * obj, std::string **val)
 }
 
 
-SWIGINTERNINLINE PyObject *
-SWIG_FromCharPtrAndSize(const char* carray, size_t size)
-{
-  if (carray) {
-    if (size > INT_MAX) {
-      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
-      return pchar_descriptor ? 
-	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
-    } else {
-#if PY_VERSION_HEX >= 0x03000000
-#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
-      return PyBytes_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
-#else
-      return PyUnicode_DecodeUTF8(carray, static_cast< Py_ssize_t >(size), "surrogateescape");
-#endif
-#else
-      return PyString_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
-#endif
-    }
-  } else {
-    return SWIG_Py_Void();
-  }
-}
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_From_std_string  (const std::string& s)
-{
-  return SWIG_FromCharPtrAndSize(s.data(), s.size());
-}
-
-
-#include "sqlparserexp.h"
-
-
-SWIGINTERNINLINE PyObject*
-  SWIG_From_int  (int value)
-{
-  return PyInt_FromLong((long) value);
-}
-
-
 #include <limits.h>
 #if !defined(SWIG_NO_LLONG_MAX)
 # if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
@@ -3480,6 +3438,48 @@ SWIG_AsVal_short (PyObject * obj, short *val)
 }
 
 
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+      return PyBytes_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
+#else
+      return PyUnicode_DecodeUTF8(carray, static_cast< Py_ssize_t >(size), "surrogateescape");
+#endif
+#else
+      return PyString_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+}
+
+
+#include "sqlparserexp.h"
+
+
+SWIGINTERNINLINE PyObject*
+  SWIG_From_int  (int value)
+{
+  return PyInt_FromLong((long) value);
+}
+
+
 
 
 
@@ -3504,12 +3504,17 @@ extern "C" {
 SWIGINTERN PyObject *_wrap_translate(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
+  short arg2 ;
+  short arg3 ;
   int res1 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[1] ;
+  short val2 ;
+  int ecode2 = 0 ;
+  short val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
   std::string result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if (!SWIG_Python_UnpackTuple(args, "translate", 3, 3, swig_obj)) SWIG_fail;
   {
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
@@ -3521,7 +3526,17 @@ SWIGINTERN PyObject *_wrap_translate(PyObject *self, PyObject *args) {
     }
     arg1 = ptr;
   }
-  result = translate((std::string const &)*arg1);
+  ecode2 = SWIG_AsVal_short(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "translate" "', argument " "2"" of type '" "short""'");
+  } 
+  arg2 = static_cast< short >(val2);
+  ecode3 = SWIG_AsVal_short(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "translate" "', argument " "3"" of type '" "short""'");
+  } 
+  arg3 = static_cast< short >(val3);
+  result = translate((std::string const &)*arg1,arg2,arg3);
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
@@ -3741,7 +3756,7 @@ fail:
 
 
 static PyMethodDef SwigMethods[] = {
-	 { "translate", _wrap_translate, METH_O, NULL},
+	 { "translate", _wrap_translate, METH_VARARGS, NULL},
 	 { "CreateParserObject", _wrap_CreateParserObject, METH_NOARGS, NULL},
 	 { "SetParserTypes", _wrap_SetParserTypes, METH_VARARGS, NULL},
 	 { "SetParserOption", _wrap_SetParserOption, METH_VARARGS, NULL},
