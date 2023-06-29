@@ -1,5 +1,10 @@
 %module sqlines
 
+%include "std_string.i"
+ 
+std::string translate(const std::string &input, short source, short target);
+
+
 %{
 #include "sqlparserexp.h"
 %}

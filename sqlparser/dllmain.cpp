@@ -101,18 +101,25 @@ BOOL APIENTRY DllMain( HMODULE /*hModule*/, DWORD  ul_reason_for_call, LPVOID /*
 #include "sqlparser.h"
 #include <string>
 #include <iostream>
-int main()
-{
-    SqlParser sql_parser;
-	sql_parser.SetTypes(SQL_MYSQL, SQL_ORACLE);
 
-	std::string input("select * from tables where tables.column1 = 5;");
+std::string translate(const std::string &input,short source, short target){
+    SqlParser sql_parser;
+	sql_parser.SetTypes(source, target);
+
 	const char* output;
 	int out_size = 0;
 	int lines = 0;
 	sql_parser.Convert(input.c_str(), input.length() , &output, &out_size, &lines);
 	std::cout<< input << std::endl;
 	std::cout<< output << std::endl;
+	auto ret = std::string(output);
+	delete[] output;
+	return ret;
+}
+int main()
+{
+	std::string input("select * from tables where tables.column1 = 5;");
+	translate(input,SQL_MYSQL,SQL_ORACLE);
 
     return 0;
 }

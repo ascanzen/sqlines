@@ -72,6 +72,10 @@ run:
 	@make DEBUG=true && ./sqlline
 
 python:
+	rm -fr ./build
+	$(E)Removing files
+	$(Q)rm -f $(BINFILE) obj/* Makefile.dep
+	export CPLUS_INCLUDE_PATH="/usr/local/Cellar/python@3.9/3.9.17_1/Frameworks/Python.framework/Versions/3.9/include/python3.9"
 	#swig -python -c++ -o ./sqlparser/sqlines_wrap.cpp ./sqlparser/sqlines.i
 	python3.9 setup.py build
 	python3.9 setup.py install

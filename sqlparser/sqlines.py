@@ -58,6 +58,9 @@ class _SwigNonDynamicMeta(type):
     __setattr__ = _swig_setattr_nondynamic_class_variable(type.__setattr__)
 
 
+
+def translate(input, source, target):
+    return _sqlines.translate(input, source, target)
 SQL_SQL_SERVER = _sqlines.SQL_SQL_SERVER
 SQL_ORACLE = _sqlines.SQL_ORACLE
 SQL_DB2 = _sqlines.SQL_DB2
