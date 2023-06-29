@@ -5,4 +5,6 @@ if __name__ == "__main__":
     # parser = sqlines.CreateParserObject()
     # result = "select * from aip"
     # code = sqlines.ConvertSql(parser,"select * from aip",4000,result,None,None)
-    sqlines.translate("select * from aip", sqlines.SQL_MYSQL, sqlines.SQL_ORACLE)
+    sqlines.translate(
+        "select * from aip limit 5;", sqlines.SQL_MYSQL, sqlines.SQL_ORACLE
+    )
