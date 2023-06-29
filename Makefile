@@ -68,6 +68,7 @@ clean:
 	$(Q)rm -f $(BINFILE) obj/* Makefile.dep
 
 run:
+	@rm -fr ./sqlparser/sqlines_wrap.cpp
 	@make DEBUG=true && ./sqlline
 
 python:
